@@ -5,7 +5,7 @@ import { Button } from './ui/button';
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
-import { Task } from '@/lib/generated/prisma';
+import { Task } from '@/app/generated/prisma';
 import { toast } from 'sonner';
 import { addTask, editTask } from '@/app/dashboard/actions';
 import { TaskForm } from '@/app/types/task';

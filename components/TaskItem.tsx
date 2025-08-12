@@ -4,10 +4,10 @@ import { toast } from 'sonner';
 import { toggleTask, deleteTask } from '@/app/dashboard/actions';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Task } from '@/lib/generated/prisma';
+import { Task } from '@/app/generated/prisma';
 import TaskForm from './TaskForm';
 import { cn } from '@/lib/utils';
-import { Delete, Trash2 } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 
 type TaskItemProps = {
   task: Task;
