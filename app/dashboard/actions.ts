@@ -34,6 +34,7 @@ export async function addTask(taskForm: TaskForm) {
     revalidatePath('/dashboard');
     return { success: 'Task added' };
   } catch (e) {
+    console.log(e);
     return { error: 'Failed to create task' };
   }
 }
@@ -61,6 +62,7 @@ export async function editTask(id: string, taskForm: TaskForm) {
     revalidatePath('/dashboard');
     return { success: 'Task updated' };
   } catch (e) {
+    console.log(e);
     return { error: 'Failed to update task' };
   }
 }
@@ -84,6 +86,7 @@ export async function toggleTask(id: string, completed: boolean) {
     revalidatePath('/dashboard');
     return { success: 'Task status updated' };
   } catch (e) {
+    console.log(e);
     return { error: 'Failed to update task status' };
   }
 }
@@ -106,6 +109,7 @@ export async function deleteTask(id: string) {
     revalidatePath('/dashboard');
     return { success: 'Task deleted' };
   } catch (e) {
+    console.log(e);
     return { error: 'Failed to delete task' };
   }
 }

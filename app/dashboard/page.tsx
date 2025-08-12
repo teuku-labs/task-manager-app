@@ -3,6 +3,7 @@ import { currentUser } from '@clerk/nextjs/server';
 import { TaskItem } from '@/components/TaskItem';
 import prisma from '@/lib/prisma';
 import TaskForm from '@/components/TaskForm';
+import { Task } from '@prisma/client';
 
 export default async function DashboardPage() {
   const user = await currentUser();
@@ -30,7 +31,7 @@ export default async function DashboardPage() {
       </div>
 
       <div className='space-y-4'>
-        {tasks.map((task: any) => (
+        {tasks.map((task: Task) => (
           <TaskItem key={task.id} task={task} />
         ))}
         {tasks.length === 0 && (
