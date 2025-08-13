@@ -9,7 +9,7 @@ import { Task } from '@prisma/client';
 import { toast } from 'sonner';
 import { addTask, editTask } from '@/app/dashboard/actions';
 import { TaskForm } from '@/app/types/task';
-import { Edit } from 'lucide-react';
+import { Edit, Loader2 } from 'lucide-react';
 import { Textarea } from './ui/textarea';
 
 interface Props {
@@ -24,12 +24,13 @@ export default function TaskFormComponent({ currentTask }: Props) {
   };
   const [taskForm, setTaskForm] = useState(initData);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async () => {
-    let result;
+    setIsLoading(true);
     if (isEdit && currentTask) {
       // Edit task
-      result = await editTask(currentTask.id, taskForm);
+      const result = await editTask(currentTask.id, taskForm);
       if (result?.error) {
         toast.error(result.error);
       } else {
@@ -38,7 +39,7 @@ export default function TaskFormComponent({ currentTask }: Props) {
       }
     } else {
       // Add task
-      result = await addTask(taskForm);
+      const result = await addTask(taskForm);
       if (result?.error) {
         toast.error(result.error);
       } else {
@@ -47,6 +48,7 @@ export default function TaskFormComponent({ currentTask }: Props) {
         setIsDialogOpen(false);
       }
     }
+    setIsLoading(false);
   };
 
   return (
@@ -74,7 +76,9 @@ export default function TaskFormComponent({ currentTask }: Props) {
           <DialogClose asChild>
             <Button variant='outline'>Cancel</Button>
           </DialogClose>
-          <Button onClick={handleSubmit}>{isEdit ? 'Save Changes' : 'Add Task'}</Button>
+          <Button onClick={handleSubmit} disabled={isLoading}>
+            {isLoading && <Loader2 className='animate-spin' />} {isEdit ? 'Save Changes' : 'Add Task'}
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

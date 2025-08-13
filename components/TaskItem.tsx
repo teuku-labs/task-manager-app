@@ -8,33 +8,45 @@ import { Task } from '@prisma/client';
 import TaskForm from './TaskForm';
 import { cn } from '@/lib/utils';
 import { Trash2 } from 'lucide-react';
+import { useState } from 'react';
 
 type TaskItemProps = {
   task: Task;
 };
 
 export function TaskItem({ task }: TaskItemProps) {
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleToggle = async () => {
+    setIsLoading(true);
     const result = await toggleTask(task.id, !task.completed);
-    if (result?.error) toast.error(result.error);
+    if (result?.error) {
+      toast.error(result.error);
+    }
+    setIsLoading(false);
   };
 
   const handleDelete = async () => {
+    setIsLoading(true);
     const result = await deleteTask(task.id);
-    if (result?.error) toast.error(result.error);
-    else toast.success('Task deleted!');
+    if (result?.error) {
+      toast.error(result.error);
+    } else {
+      toast.success('Task deleted!');
+    }
+    setIsLoading(false);
   };
 
   return (
-    <Card className={cn(task.completed ? 'bg-gray-200' : 'bg-white')}>
+    <Card className={cn(task.completed ? 'bg-gray-200' : 'bg-white', isLoading && 'opacity-70')}>
       <CardHeader className='flex items-center justify-between'>
         <h3 className={cn('flex-grow text-lg', task.completed ? 'line-through text-gray-500' : 'text-gray-800')}>{task.title}</h3>
         <div className='flex items-center gap-2'>
-          <Button className={cn('italic font-normal text-sm', task.completed && 'text-green-500')} variant='link' size='sm' onClick={handleToggle}>
+          <Button className={cn('italic font-normal text-sm', task.completed && 'text-green-500')} variant='link' size='sm' onClick={handleToggle} disabled={isLoading}>
             {task.completed ? 'Completed' : 'Mark as Complete'}
           </Button>
           <TaskForm currentTask={task} />
-          <Button variant='destructive' size='icon' onClick={handleDelete}>
+          <Button variant='destructive' size='icon' onClick={handleDelete} disabled={isLoading}>
             <Trash2 />
           </Button>
         </div>
