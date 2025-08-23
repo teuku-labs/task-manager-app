@@ -62,13 +62,13 @@ export default function TaskFormComponent({ currentTask }: Props) {
         <DialogHeader>
           <DialogTitle>{isEdit ? 'Edit' : 'Add'} Task</DialogTitle>
         </DialogHeader>
-        <div className='grid gap-4 py-4'>
+        <div className='grid gap-3'>
           <Label htmlFor='title'>
             Task Title <span className='text-red-400'>*</span>
           </Label>
           <Input id='title' value={taskForm.title} onChange={(e) => setTaskForm((currTaskFrom) => ({ ...currTaskFrom, title: e.target.value }))} />
         </div>
-        <div className='grid gap-4 py-4'>
+        <div className='grid gap-3'>
           <Label htmlFor='title'>Task Description</Label>
           <Textarea id='description' value={taskForm.description} onChange={(e) => setTaskForm((currTaskFrom) => ({ ...currTaskFrom, description: e.target.value }))} />
         </div>

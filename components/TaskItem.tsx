@@ -38,7 +38,7 @@ export function TaskItem({ task }: TaskItemProps) {
   };
 
   return (
-    <Card className={cn(task.completed ? 'bg-gray-200' : 'bg-white', isLoading && 'opacity-70')}>
+    <Card className={cn('gap-3', task.completed ? 'bg-gray-200' : 'bg-white', isLoading && 'opacity-70')}>
       <CardHeader className='flex items-center justify-between'>
         <h3 className={cn('flex-grow text-lg', task.completed ? 'line-through text-gray-500' : 'text-gray-800')}>{task.title}</h3>
         <div className='flex items-center gap-2'>

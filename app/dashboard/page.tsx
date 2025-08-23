@@ -35,7 +35,7 @@ export default async function DashboardPage() {
           <TaskItem key={task.id} task={task} />
         ))}
         {tasks.length === 0 && (
-          <div className='text-center py-10 bg-white rounded-lg shadow-sm'>
+          <div className='text-center py-10 bg-white rounded-[20px] shadow-sm'>
             <p className='text-gray-500'>You have no tasks yet. Add one above!</p>
           </div>
         )}
